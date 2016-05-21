@@ -3,6 +3,9 @@ package secrets.service;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
+
 import org.apache.log4j.Logger;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -13,8 +16,6 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 import secrets.model.Secret;
 
 @Service
@@ -71,7 +72,9 @@ public class SecretService {
     }
 
     public void addSecrets(List<Secret> newSecrets) {
-        newSecrets.forEach(this::addSecret);
+    	for (Secret newSecret : newSecrets) {
+    		addSecret(newSecret);
+    	}
     }
 
     private BasicDBObject getBasicDBObject(Secret secret) {
