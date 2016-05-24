@@ -32,6 +32,11 @@ public class SecretsController {
     @Inject
     private TokenService tokenService;
 
+    @RequestMapping(value = "test", method = RequestMethod.GET)
+    public String test() {
+    	return "test";
+    }
+    
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String login(@RequestParam("code") String code) {
         logger.info("[login] Logging in...");
